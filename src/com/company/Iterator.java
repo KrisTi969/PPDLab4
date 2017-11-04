@@ -29,7 +29,7 @@ public class Iterator implements java.util.Iterator{
     public void print() {
         NodeV2 node = current;
         while (node != null) {
-            System.out.println("Afisare nod: " + node.getKey() + " nod:" + node + " ,next:" + node.getNext());
+            System.out.println("Este operatie de ITEREARE " + "Afisare nod: " + node.getKey() + " nod:" + node + " ,next:" + node.getNext());
             node = node.getNext();
         }
     }
