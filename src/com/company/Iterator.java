@@ -4,12 +4,18 @@ import com.company.Node;
 /**
  * Created by crys_ on 03.11.2017.
  */
-public class Iterator implements java.util.Iterator{
+public class Iterator implements java.util.Iterator {
     private NodeV2 current;
     SortedLinkedListV2 listV2;
+    public int iteration_step = 1;
 
     public Iterator(SortedLinkedListV2 listV2) {
         this.current = listV2.getFirst();
+    }
+
+    public Iterator(SortedLinkedListV2 listV2, int iteration_step) {
+        this.current = listV2.getFirst();
+        this.iteration_step = iteration_step;
     }
 
     public NodeV2 next() {
@@ -29,8 +35,9 @@ public class Iterator implements java.util.Iterator{
     public void print() {
         NodeV2 node = current;
         while (node != null) {
-            System.out.println("Este operatie de ITEREARE " + "Afisare nod: " + node.getKey() + " nod:" + node + " ,next:" + node.getNext());
+            System.out.println("Este operatie de ITEREARE " + "Afisare nod: " + node.getKey() + " nod:" + node + " ,next:" + node.getNext()+" pasul: " + iteration_step);
             node = node.getNext();
         }
+        iteration_step++;
     }
 }

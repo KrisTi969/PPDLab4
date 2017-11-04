@@ -11,8 +11,6 @@ public class SortedLinkedListV2 extends Thread{
     public Lock lock = new ReentrantLock();
 
 
-
-
     public SortedLinkedListV2() {
         head = new NodeV2(Integer.MIN_VALUE);
         head.next = new NodeV2(Integer.MAX_VALUE);
