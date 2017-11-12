@@ -1,12 +1,9 @@
 package com.company;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 
 /**
  * Created by crys_ on 04.11.2017.
  */
-public class SortedLinkedListV2_Runnable_Fine_Grain_Add extends Thread {
+public class SortedLinkedListV2_Runnable_Fine_Grain_Add extends NotifyingThread  {
 
     public int start = 0;
     public SortedLinkedListV2 listV2;
@@ -41,7 +38,7 @@ public class SortedLinkedListV2_Runnable_Fine_Grain_Add extends Thread {
 
 
     @Override
-    public synchronized void run() {
+    public synchronized void doRun() {
         int aux = 0;
         if (operatie.equals("Adaugare")) {
             while (item != jstart) {
@@ -79,7 +76,7 @@ public class SortedLinkedListV2_Runnable_Fine_Grain_Add extends Thread {
                 listV2.head.lock.lock();
                 Iterator iterator = new Iterator(listV2);
                 item = iterator.next().getKey();
-                /*try {
+                try {
                     item = iterator.next().getKey();
                 } catch (NullPointerException e) {
                     try {
@@ -87,7 +84,7 @@ public class SortedLinkedListV2_Runnable_Fine_Grain_Add extends Thread {
                     } catch (InterruptedException e1) {
                         e1.printStackTrace();
                     }
-                }*/
+                }
                 NodeV2 pred = listV2.head;
                 try {
                     NodeV2 curr = pred.next;
@@ -107,20 +104,21 @@ public class SortedLinkedListV2_Runnable_Fine_Grain_Add extends Thread {
                     } finally {
                         curr.lock.unlock();
                     }
-                }finally {
+                } finally {
                     pred.lock.unlock();
                     item++;
                     long stop = System.nanoTime();
-                    System.out.println("Este operatie de Stergere " + "Operatia a inceput la: " + stop + "si se sterge valoarea: " + item + " Threadul care se ocupa: " +getName());
+                    System.out.println("Este operatie de Stergere " + "Operatia a inceput la: " + stop + "si se sterge valoarea: " + item + " Threadul care se ocupa: " + getName());
                     start++;
                 }
             }
         }
-        while (aux != 4) {
-            if (operatie == "Iteratie") {
-                Iterator iterator = new Iterator(listV2,aux);
+       // while (aux != 4) {
+            if (operatie.equals("Iteratie")) {
+                Iterator iterator = new Iterator(listV2, aux);
                 long stop = System.nanoTime();
-                System.out.print( "Operatia a inceput la: " + stop + "si se afiseza valoarea: " + item + " Threadul care se ocupa: " + getName());
+                System.out.print("Operatia a inceput la: " + stop + "si se afiseza valoarea: " + item + " Threadul care se ocupa: " + getName());
+                iterator.print();
                 try {
                     iterator.print();
                     aux++;
@@ -129,7 +127,7 @@ public class SortedLinkedListV2_Runnable_Fine_Grain_Add extends Thread {
                     e.printStackTrace();
                 }
             }
-        }
+      //  }
 
     }
 }
